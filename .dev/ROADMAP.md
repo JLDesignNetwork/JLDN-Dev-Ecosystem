@@ -13,8 +13,8 @@ This roadmap codifies the strategic phases required to fully build out the JLDN 
 - **Gitignore Standards:** Enforcing the `[._]*/` directory-only pattern and `.agents/` / `.secrets/` isolation.
 - **Remote Configuration:** Codifying branch protection, Private Vulnerability Reporting enablement via GitHub API, and issue template requirements.
 
-### [Phase 3] Metadata & Frontmatter Standards (Status: Pending)
-- **JLDN Frontmatter Schema:** Defining the strict YAML/JSON frontmatter block (`author`, `platform`, `type`, `version`, `backlog`) required in all primary Markdown documents.
+### [Phase 3] Metadata & Frontmatter Standards (Status: Complete)
+- **JLDN Frontmatter Schema:** Defining the Universal Polymorphic JSON Schema block (`author`, `platform`, `type`, `version`, `backlog`) required in all primary Markdown documents.
 - **Inter-file Routing:** Documenting how frontmatter dynamically points to the active `backlog.json` and syncs epochs with `CHANGELOG.md`.
 
 ### [Phase 4] Workflow & Backlog Schema (Status: Pending)

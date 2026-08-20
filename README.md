@@ -2,13 +2,13 @@
 {
   "metadata": {
     "author": "Jeff Langdon",
-    "rulesetName": "JLDN Dev Ecosystem",
+    "projectName": "JLDN Dev Ecosystem",
     "type": "ruleset",
     "platform": "github:public",
-    "version": "2608.1.0-bs",
-    "backlog": ".dev/backlog.json",
-    "changelog": "CHANGELOG.md"
-  }
+    "version": "2608.1.0-bs"
+  },
+  "backlog": ".dev/backlog.json",
+  "changelog": "CHANGELOG.md"
 }
 ---
 # JLDN Dev Ecosystem

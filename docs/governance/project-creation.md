@@ -1,3 +1,17 @@
+---
+{
+  "metadata": {
+    "author": "JLDN",
+    "projectName": "Project Initialization Governance",
+    "type": "governance",
+    "platform": "github:public",
+    "version": "2608.1.0-bs"
+  },
+  "backlog": ".dev/backlog.json",
+  "changelog": "CHANGELOG.md"
+}
+---
+
 # Project Initialization Governance
 
 This document codifies the mandatory standards for initializing any project within the JLDN ecosystem.

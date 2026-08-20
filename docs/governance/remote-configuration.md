@@ -1,9 +1,15 @@
 ---
-author: JLDN
-platform: github:public
-type: governance
-version: 2608.1.0-bs
-backlog: ROOT
+{
+  "metadata": {
+    "author": "JLDN",
+    "projectName": "Remote Repository Governance",
+    "type": "governance",
+    "platform": "github:public",
+    "version": "2608.1.0-bs"
+  },
+  "backlog": ".dev/backlog.json",
+  "changelog": "CHANGELOG.md"
+}
 ---
 
 # Remote Repository Governance
