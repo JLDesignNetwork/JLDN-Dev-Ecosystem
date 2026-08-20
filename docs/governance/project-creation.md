@@ -32,7 +32,12 @@ Every project must include the following root-level files:
 
 *Failure to include these files will result in a failed audit.*
 
-## 3. GitHub Remote Governance
+## 3. Mandatory Local Directories (Blackholed)
+
+The following directories must be manually scaffolded by the developer/agent locally, as they are intentionally blackholed from Git via the `[._]*/` rule:
+- **`.secrets/`**: Must contain `eco-config.json` to define remote variables, authentication tokens, and CI constraints (see `remote-configuration.md`).
+- **`.agents/rules/`**: Must be created to hold any repository-specific behavioral markdown rules for automation tooling.
+## 4. GitHub Remote Governance
 
 All repositories must be initialized with strict remote configurations via the GitHub API to ensure operational security and clean workflow management.
 
