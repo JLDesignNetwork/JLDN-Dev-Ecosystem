@@ -31,3 +31,10 @@ Every project must include the following root-level files:
 - `.editorconfig`, `.aiexclude`, `.aiignore`
 
 *Failure to include these files will result in a failed audit.*
+
+## 3. GitHub Remote Governance
+
+All repositories must be initialized with strict remote configurations via the GitHub API to ensure operational security and clean workflow management.
+
+- **Private Vulnerability Reporting:** Must be explicitly enabled to allow users to securely disclose security flaws without public exposure. 
+  - *Command:* `gh api -X PUT /repos/JLDesignNetwork/[ProjectName]/private-vulnerability-reporting`
