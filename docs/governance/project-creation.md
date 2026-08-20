@@ -4,11 +4,11 @@ This document codifies the mandatory standards for initializing any project with
 
 ## 1. Universal `.gitignore` Standard
 
-All JLDN projects must utilize an aggressive default `.gitignore` that blackholes all hidden files (`.*/`), enforcing strict explicit whitelisting for infrastructure. 
+All JLDN projects must utilize an aggressive default `.gitignore` that blackholes all hidden and temporary directories (`[._]*/`), enforcing strict explicit whitelisting for infrastructure. 
 
 ```gitignore
 .DS_Store
-.*/
+[._]*/
 
 # Exceptions
 !.dev/
@@ -16,8 +16,8 @@ All JLDN projects must utilize an aggressive default `.gitignore` that blackhole
 ```
 
 ### Explanation of Rules
-- **`.agents/` (Blackholed):** The `.agents/` directory is strictly reserved for local AI agent workspaces, temporary scratch scripts, and local LLM system prompts (`AGENTS.md`). It must **never** be tracked by Git or pushed to a public repository.
-- **`.secrets/` (Blackholed):** Any API keys, `.env` files, or AI automation credentials must be stored in the `.secrets/` directory (or `.env`), which is automatically blackholed by the `.*/` default.
+- **`.agents/` & Temporary Folders (Blackholed):** The `.agents/` directory is strictly reserved for local AI workspaces. Temporary build folders typically begin with an underscore (e.g. `_site/`). The `[._]*/` rule automatically blackholes all directories starting with a dot or underscore.
+- **`.secrets/` (Blackholed):** Any API keys or credentials must be stored in the `.secrets/` directory (or `.env`), which is automatically blackholed by the `[._]*/` default.
 - **`.dev/` (Whitelisted):** The `.dev/` directory is the core of the JLDN Generational Versioning Schema and Backlog system. It must be explicitly whitelisted to ensure tasks and roadmaps are version-controlled.
 - **`.github/` (Whitelisted):** The `.github/` directory is mandatory for CI/CD actions, issue templates, and governance files (Code of Conduct, Security, Funding).
 
