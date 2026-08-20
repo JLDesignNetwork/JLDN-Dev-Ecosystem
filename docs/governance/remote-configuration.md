@@ -22,7 +22,8 @@ Automation Tooling (whether AI Agents or custom Python execution scripts) must *
 Key-value configurations unique to the user/organization that require privacy:
 - `github_organization`, `gitlab_organization`, `default_author`, `support_email`.
 - `auth_keys`: Personal Access Tokens (PAT), API keys, or deployment tokens.
-- `tier`: (e.g., `github_tier: "free" | "pro"`) to inform automation about CI limitations.
+- `tier`: (e.g., `github_tier: "free"`, `gitlab_tier: "free"`) to inform automation about CI/CD limitations.
+- `gitlab_host`: (e.g., `gitlab.com` or a self-hosted custom domain URL) to inform the automation where to route API commands.
 - *Overrides:* Simple true/false overrides (e.g., `allow_feature_branches: true`).
 
 ### **What belongs in `.agents/rules/`? (Custom Behavior Rules)**
@@ -30,7 +31,7 @@ Overriding *behavioral logic* (e.g., "Always write tests in Pest" or "Never use 
 
 ## 3. Remote Host & Gist Routing Policy
 
-### **GitLab** (`https://gitlab.com/{{gitlab_organization}}/[ProjectName]`)
+### **GitLab** (`https://{{gitlab_host}}/{{gitlab_organization}}/[ProjectName]`)
 - **Use Case:** Exclusively reserved for **Live Websites and Web Applications** requiring automated server-to-repository pulls or complex CI/CD deployments.
 - **Snippets:** For single-file configurations or localized live-server payloads, use GitLab Snippets.
 
