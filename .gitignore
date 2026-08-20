@@ -1,3 +1,6 @@
 .DS_Store
-.agents/scratch/*
-!.agents/scratch/.gitkeep
+.*/
+
+# Exceptions
+!.dev/
+!.github/
