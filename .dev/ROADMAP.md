@@ -8,7 +8,7 @@ This roadmap codifies the strategic phases required to fully build out the JLDN 
 - **The 5-Step Guided Wizard:** Documenting the interactive prompt sequence for new projects (Identity, Storage Routing, Archetypes, GVS Epoch, and Git Remotes).
 - **Mandatory Scaffolding:** Codifying the Universal Baseline directory structure and the exact baseline files required (`CLAUDE.md`, `.dev/`, `.github/`, `.gitignore`, etc.).
 
-### [Phase 2] Repository & Git Governance (Status: In Progress)
+### [Phase 2] Repository & Git Governance (Status: Complete)
 - **Repository Creation Rules:** Documenting the GitLab (Live apps) vs GitHub (Docs/Tooling) routing policy and visibility defaults.
 - **Gitignore Standards:** Enforcing the `[._]*/` directory-only pattern and `.agents/` / `.secrets/` isolation.
 - **Remote Configuration:** Codifying branch protection, Private Vulnerability Reporting enablement via GitHub API, and issue template requirements.
