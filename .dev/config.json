@@ -1,7 +1,55 @@
 {
   "handoff_sync": false,
   "aliases": {
-    "audit": "Housekeeping",
-    "done": "Goodnight"
+    "jldn-propose": [
+      "propose",
+      "proposal",
+      "proposition"
+    ],
+    "jldn-cleanup": [
+      "housekeeping",
+      "cleanup"
+    ],
+    "jldn-done": [
+      "goodnight",
+      "done"
+    ],
+    "jldn-scaffold": [
+      "new_project",
+      "scaffold"
+    ],
+    "jldn-evolve": [
+      "evolve",
+      "mutate",
+      "lock-in"
+    ],
+    "audit-orange": [
+      "retrofit"
+    ],
+    "audit-red": [
+      "adversarial",
+      "exploits"
+    ],
+    "audit-yellow": [
+      "logic-flow"
+    ],
+    "audit-white": [
+      "forensics"
+    ],
+    "audit-blue": [
+      "defensive-caps"
+    ],
+    "audit-green": [
+      "tooling-ci"
+    ],
+    "audit-purple": [
+      "holistic"
+    ],
+    "audit-rainbow": [
+      "full-spectrum"
+    ],
+    "audit-cyclic-logic-defense": [
+      "cyclic-engine"
+    ]
   }
 }

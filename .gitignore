@@ -4,3 +4,6 @@
 # Exceptions
 !.dev/
 !.github/
+
+# Ecosystem Installer Package (Strictly Local)
+.dev-ecosystem/

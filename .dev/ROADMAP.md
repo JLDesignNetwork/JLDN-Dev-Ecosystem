@@ -24,8 +24,17 @@ This roadmap codifies the strategic phases required to fully build out the JLDN 
 - **Devil's Advocate Protocol:** Codifying the mandatory AI agent stress-test requirements prior to executing structural code changes.
 - **Automation Triggers:** Documenting the scope of `Housekeeping` and `Goodnight` protocols (including the `handoff_sync` logic).
 
-### [Phase 5] Versioning, Git Protocol, & Releases (Status: Pending)
+### [Phase 5] Versioning, Git Protocol, & Releases (Status: Complete)
 - **Generational Version Schema (GVS):** Formally documenting epoch calculations (`[YYMM].[SUB].[REV]-[TAG]`).
 - **Direct-to-Main Workflows:** Documenting trunk-based development constraints (no feature branches unless specified).
 - **Taxonomy Dual-Commit Protocol:** Formalizing the standard `Fix [DOMAIN]-TODO-XX: [...]` vs Conventional Commits (`feat:`, `fix:`) syntax.
 - **Changelog Automation:** Codifying how tasks synchronize with `CHANGELOG.md` upon `"Housekeeping"` or `"Goodnight"` routines.
+
+### [Phase 6] System Auditing & Quality Gates (Status: Complete)
+- **7-Color Audit Team Spectrum:** Extracted all protocols into the standalone `jldn-audits` Antigravity plugin.
+- **Phase-Gated Groupings:** Codified Preflight, Logic, and Defense auditing stages.
+- **Cyclic Engine:** Introduced procedural looping (`audit-cyclic-logic-defense`) ensuring 0 defects before advancing.
+
+### [Phase 7] True Cross-Platform & AI Agnosticism (Status: Pending)
+- **OS-Agnostic Execution Policy:** Abstract `system-environment.md` to formally support Windows (PowerShell/WSL) and Linux environments alongside macOS.
+- **Cross-Platform Hooks:** Rewrite the `inject-aliases.sh` hook into a natively cross-platform scripting language (like Python or Node.js) to eliminate raw Bash dependencies.

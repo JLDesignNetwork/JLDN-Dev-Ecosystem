@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "id": "ROOT-TODO-01",
+    "title": "Abstract system-environment.md for Cross-Platform Support",
+    "details": "Removed macOS hardcoded paths (/opt/homebrew, /bin/zsh) and replaced with token-efficient OS-agnostic dynamic detection directives.",
+    "status": "completed",
+    "protection": "protected",
+    "priority": "high-1",
+    "created_at": "2026-08-20T21:45:00+02:00",
+    "existed_since": "2608.0.0-a"
+  },
+  {
+    "id": "ROOT-TODO-02",
+    "title": "Refactor inject-aliases Hook",
+    "details": "Rewrote the inject-aliases.sh Bash script into inject-aliases.py so that the PreInvocation hook functions natively on Windows environments without WSL requirements.",
+    "status": "completed",
+    "protection": "protected",
+    "priority": "high-1",
+    "created_at": "2026-08-20T21:45:00+02:00",
+    "existed_since": "2608.0.0-a"
+  },
+  {
+    "id": "ROOT-TODO-03",
+    "title": "Define explicit lifecycle properties for all .dev-ecosystem files",
+    "details": "Injected @lifecycle persistent and @cleanup manual frontmatter/metadata into all 30 files within the .dev-ecosystem package to structurally prevent accidental deletion by ephemeral purge routines.",
+    "status": "completed",
+    "protection": "protected",
+    "priority": "critical-2",
+    "created_at": "2026-08-20T21:45:00+02:00",
+    "existed_since": "2608.0.0-a"
+  },
+  {
+    "id": "ROOT-TODO-04",
+    "title": "Codify Global vs Local execution scope",
+    "details": "Formalized the Global vs Local installation matrix within the engine architecture by restructuring the .dev-ecosystem folder into global-assets and local-assets, structurally preventing strict local components from leaking into the global config.",
+    "status": "completed",
+    "protection": "protected",
+    "priority": "critical-1",
+    "created_at": "2026-08-20T21:45:00+02:00",
+    "existed_since": "2608.0.0-a"
+  },
+  {
+    "id": "ROOT-TODO-05",
+    "title": "Define Global vs Local Pointer Resolution for Third-Party AIs",
+    "details": "Expanded the installer pointer resolution logic to dynamically write AI-specific configuration files (e.g. .cursorrules, CLAUDE.md, .github/copilot-instructions.md) into either the OS home directory or the local project directory based on the installation scope.",
+    "status": "completed",
+    "protection": "protected",
+    "priority": "high-2",
+    "created_at": "2026-08-20T21:45:00+02:00",
+    "existed_since": "2608.0.0-a"
+  },
+  {
+    "id": "ROOT-TODO-06",
+    "title": "Shift ecosystem installer to Global-First Paradigm",
+    "details": "Refactored the ecosystem into a global plugin. Renamed AGENTS.md to ECOSYSTEM_SETUP.md. Adjusted jldn-scaffold to act as the global anchor that conditionally pulls local-assets into new projects based on user opt-in.",
+    "status": "completed",
+    "protection": "protected",
+    "priority": "critical-1",
+    "created_at": "2026-08-20T22:33:00+02:00",
+    "existed_since": "2608.0.0-a"
+  }
+]
