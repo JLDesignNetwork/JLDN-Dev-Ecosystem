@@ -21,18 +21,23 @@ To properly utilize the JLDN remote governance automation, the host environment 
 1. **GitHub CLI (`gh`) & GitLab CLI (`glab`)**: Installed and fully authenticated.
 2. **`eco-config.json`**: An initialized configuration file at `.secrets/eco-config.json` containing the required organizational variables.
 
-## 2. Dynamic Variable Resolution (`eco-config.json`)
-Automation Tooling (whether AI Agents or custom Python execution scripts) must **never** assume hardcoded organizational paths. The automation MUST read `.secrets/eco-config.json` to resolve routing keys, authentication tokens, and account tier limitations.
+## 2. Dynamic Variable Resolution & Configuration Split
 
-### **What belongs in `eco-config.json`? (Environment Variables & Auth)**
-Key-value configurations unique to the user/organization that require privacy:
+Automation Tooling (whether AI Agents or custom Python execution scripts) must **never** assume hardcoded organizational paths. The automation MUST dynamically resolve settings through two distinct configuration files to ensure security and portability.
+
+### **A. The Private Vault (`.secrets/eco-config.json`)**
+This file is strictly for environment variables and secrets that require privacy. It is permanently blackholed from Git.
 - `github_organization`, `gitlab_organization`, `default_author`, `support_email`.
 - `auth_keys`: Personal Access Tokens (PAT), API keys, or deployment tokens.
 - `tier`: (e.g., `github_tier: "free"`, `gitlab_tier: "free"`) to inform automation about CI/CD limitations.
 - `gitlab_host`: (e.g., `gitlab.com` or a self-hosted custom domain URL) to inform the automation where to route API commands.
-- *Overrides:* Simple true/false overrides (e.g., `allow_feature_branches: true`).
 
-### **What belongs in `.agents/rules/`? (Custom Behavior Rules)**
+### **B. The Public Blueprint (`.dev/config.json`)**
+This file handles safe, public-facing ecosystem behaviors and automation toggles. It is safely committed to Git to ensure standard behavior across machines.
+- `handoff_sync`: (e.g., `true` or `false`) Toggles whether AI Handoff documents are synced via Git.
+- `aliases`: Custom JSON mappings for automation commands (e.g., mapping `"audit"` to `"Housekeeping"`).
+
+### **C. Custom Behavioral Rules (`.agents/rules/`)**
 Overriding *behavioral logic* (e.g., "Always write tests in Pest" or "Never use Tailwind") must be provided as custom markdown rules. **Because the `.agents/` directory is blackholed by the default JLDN gitignore, users must manually create the `.agents/rules/` folder and populate it with their specific rule files.**
 
 ## 3. Remote Host & Gist Routing Policy

@@ -35,21 +35,22 @@ All JLDN projects must utilize an aggressive default `.gitignore` that blackhole
 - **`.dev/` (Whitelisted):** The `.dev/` directory is the core of the JLDN Generational Versioning Schema and Backlog system. It must be explicitly whitelisted to ensure tasks and roadmaps are version-controlled.
 - **`.github/` (Whitelisted):** The `.github/` directory is mandatory for CI/CD actions, issue templates, and governance files (Code of Conduct, Security, Funding).
 
-## 2. Mandatory Root Files
+## 2. Mandatory Root & Infrastructure Files
 
-Every project must include the following root-level files:
+Every project must include the following root-level (or explicitly whitelisted) files:
 - `README.md` (containing JLDN Frontmatter Metadata)
 - `CHANGELOG.md`
 - `LICENSE`
 - `CLAUDE.md` (A simple pointer file directing AI agents to read the local `.agents/AGENTS.md`)
 - `.editorconfig`, `.aiexclude`, `.aiignore`
+- `.dev/config.json` (The public ecosystem config for behavioral aliases and handoff mechanics).
 
 *Failure to include these files will result in a failed audit.*
 
 ## 3. Mandatory Local Directories (Blackholed)
 
 The following directories must be manually scaffolded by the developer/agent locally, as they are intentionally blackholed from Git via the `[._]*/` rule:
-- **`.secrets/`**: Must contain `eco-config.json` to define remote variables, authentication tokens, and CI constraints (see `remote-configuration.md`).
+- **`.secrets/`**: Must contain `eco-config.json` to define private remote variables, authentication tokens, and CI tier constraints (see `remote-configuration.md`).
 - **`.agents/rules/`**: Must be created to hold any repository-specific behavioral markdown rules for automation tooling.
 ## 4. GitHub Remote Governance
 

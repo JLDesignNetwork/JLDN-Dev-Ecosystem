@@ -17,10 +17,12 @@ This roadmap codifies the strategic phases required to fully build out the JLDN 
 - **JLDN Frontmatter Schema:** Defining the Universal Polymorphic JSON Schema block (`author`, `platform`, `type`, `version`, `backlog`) required in all primary Markdown documents.
 - **Inter-file Routing:** Documenting how frontmatter dynamically points to the active `backlog.json` and syncs epochs with `CHANGELOG.md`.
 
-### [Phase 4] Workflow & Backlog Schema (Status: Pending)
+### [Phase 4] Workflow & Backlog Schema (Status: Complete)
+- **The Configuration Split:** Defining `.dev/config.json` (Public Blueprint) vs `.secrets/eco-config.json` (Private Vault).
 - **Task Taxonomies:** Documenting universal `ROOT` domains vs generational `[GEN]` domains.
-- **The 11-State Lifecycle:** Documenting the exact task flow from `pending` to `completed:protected` or `deprecated`, and how tasks map to specific localized `target_files` tracking.
+- **The 11-State Lifecycle:** Documenting the exact task flow from `pending` to `completed`, and how tasks map to specific localized `target_files` tracking.
 - **Devil's Advocate Protocol:** Codifying the mandatory AI agent stress-test requirements prior to executing structural code changes.
+- **Automation Triggers:** Documenting the scope of `Housekeeping` and `Goodnight` protocols (including the `handoff_sync` logic).
 
 ### [Phase 5] Versioning, Git Protocol, & Releases (Status: Pending)
 - **Generational Version Schema (GVS):** Formally documenting epoch calculations (`[YYMM].[SUB].[REV]-[TAG]`).

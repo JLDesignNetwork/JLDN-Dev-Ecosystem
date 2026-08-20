@@ -1,11 +1,18 @@
-# JLDN Backlog Schema Specification
-
-> **Document:** `docs/specification.md`  
-> **Author:** Jeff Langdon (JL Design Network)  
-> **Standard:** JLDN Task & Backlog Management Protocol  
-> **Version:** `2608.21.0-bs`  
-
 ---
+{
+  "metadata": {
+    "author": "JLDN",
+    "projectName": "Backlog Schema Specification",
+    "type": "documentation",
+    "platform": "github:public",
+    "version": "2608.21.0-bs"
+  },
+  "backlog": ".dev/backlog.json",
+  "changelog": "CHANGELOG.md"
+}
+---
+
+# JLDN Backlog Schema Specification
 
 ## 1. Architectural Philosophy
 
