@@ -7,6 +7,295 @@
     "protection": "protected",
     "existed_since": "2608.1.0-bs",
     "created_at": "2026-08-20T12:00:00+02:00",
-    "details": "Initialize JLDN-Dev-Ecosystem repository with .dev/, .agents/, and .github/ scaffolding, completing Step 4 of the 5-Step Guided Wizard."
+    "details": "Initialized JLDN-Dev-Ecosystem repository with .dev/, .agents/, and .github/ scaffolding, completing Step 4 of the 5-Step Guided Wizard."
+  },
+  {
+    "id": "G08-TODO-02",
+    "title": "Fix Map: AI Pointer Files Misclassified as 'created'",
+    "status": "completed",
+    "priority": "critical-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T16:35:00+02:00",
+    "details": "Fixed ECOSYSTEM_SETUP.md with an explicit Classification Law mandating all external AI pointer files go under 'injected' regardless of whether they were newly created. Updated the live .jldn-ecosystem.map to move .cursorrules, .github/copilot-instructions.md, and .claude/CLAUDE.md from 'created' to 'injected'. Logic and defense audits passed."
+  },
+  {
+    "id": "G08-TODO-03",
+    "title": "Fix Map: Map File Must Not Track Itself",
+    "status": "completed",
+    "priority": "critical-2",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T16:35:00+02:00",
+    "details": "Removed the self-referencing .jldn-ecosystem.map entry from the live map's 'created' array. Clarified the Classification Law in ECOSYSTEM_SETUP.md to explicitly state the map file must never appear in either array, with its destruction handled solely by the dedicated Step 6 finalization in jldn-uninstall. Logic and defense audits passed."
+  },
+  {
+    "id": "G08-TODO-04",
+    "title": "Fix jldn-evolve: Hardcoded Absolute User Path",
+    "status": "completed",
+    "priority": "high-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T16:35:00+02:00",
+    "details": "Replaced the hardcoded absolute path /Users/jefflangdon/.gemini/config/rules/ with the correct portable path ~/.gemini/config/plugins/jldn-ecosystem/rules/ in both the global-assets source skill and the active installed jldn-evolve/SKILL.md. Logic and defense audits passed."
+  },
+  {
+    "id": "G08-TODO-05",
+    "title": "Fix jldn-agents.md: Stale Path References and Missing Skill Trigger",
+    "status": "completed",
+    "priority": "high-2",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T16:35:00+02:00",
+    "details": "Updated the Ecosystem Configuration section to reflect the correct post-flattening paths (plugins/jldn-ecosystem/rules/, hooks/jldn-hooks.json, hooks/scripts/jldn-inject-aliases.py) and corrected rule filenames to their jldn- prefixed names. Added jldn-uninstall to the Skill Trigger Index. Applied to both global-assets source and active installed jldn-agents.md. Logic and defense audits passed."
+  },
+  {
+    "id": "G08-TODO-06",
+    "title": "Fix gitignore Injection: Duplicate Rule Deduplication",
+    "status": "completed",
+    "priority": "high-3",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T16:35:00+02:00",
+    "details": "Patched Step 3A in ECOSYSTEM_SETUP.md to require explicit line-by-line duplicate checking before injecting any gitignore rule, consistent with the Step 2 global gitignore fix. The four JLDN-exclusive safe-inject rules are clearly identified. The live .gitignore_global duplicate block will self-correct on the next clean install cycle. Logic and defense audits passed."
+  },
+  {
+    "id": "G08-TODO-07",
+    "title": "Remediate All ~/  Tilde Paths for OS-Agnostic Portability",
+    "status": "completed",
+    "priority": "high-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T16:48:00+02:00",
+    "details": "Inserted a strict 'PATH RESOLUTION LAW' into the headers of ECOSYSTEM_SETUP.md, jldn-uninstall/SKILL.md, jldn-evolve/SKILL.md, and jldn-agents.md (both source and active installed versions). This law mandates that AI agents dynamically resolve the Unix ~/ shorthand to the correct OS-specific home path (%USERPROFILE% on cmd, $env:USERPROFILE on PowerShell) before executing any file operations. Logic and defense audits passed."
+  },
+  {
+    "id": "G08-TODO-08",
+    "title": "Uninstaller Trusts Map Without Validating 'created' Paths",
+    "status": "completed",
+    "priority": "critical-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T17:10:00+02:00",
+    "details": "jldn-uninstall blindly deletes every path in the map's 'created' array with no check that each path is actually confined under ~/.gemini/config/plugins/jldn-ecosystem/. A stale or hand-edited map that misclassifies a third-party file into 'created' (the exact class of bug fixed in G08-TODO-02) would cause silent, unrecoverable deletion of user-owned files. FIXED: Step 3 of jldn-uninstall/SKILL.md (source and installed) now requires real-path resolution, strict directory-boundary containment (not string-prefix), and a Blocked Deletion flag + report entry for anything that fails validation, without halting the rest of teardown. Logic and defense audits passed (see child items 08a/08b/08c)."
+  },
+  {
+    "id": "G08-TODO-09",
+    "title": "Uninstaller Has No Marker-Integrity Check on Strip",
+    "status": "completed",
+    "priority": "high-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T17:10:00+02:00",
+    "details": "Step 4 of jldn-uninstall assumes exactly one START/END marker pair per 'injected' file. A manually edited file with a missing, duplicated, or malformed marker isn't guarded against, risking stripping the wrong region or leaving a dangling marker. FIXED: Step 4 of jldn-uninstall/SKILL.md (source and installed) now requires exactly one START and one END marker in correct order before stripping; any mismatch is flagged as a Blocked Strip and recorded in the report without halting the rest of teardown. Logic and defense audits passed 100%."
+  },
+  {
+    "id": "G08-TODO-10",
+    "title": "Uninstaller Leaves Orphaned Empty Directories",
+    "status": "completed",
+    "priority": "medium-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T17:10:00+02:00",
+    "details": "The 'created' array only ever lists files, never directories, so plugin directory trees (rules/, skills/, hooks/, hooks/scripts/, etc.) are left behind empty after teardown, contradicting the teardown report's implied 'clean' result. FIXED: Added a new Step 5 'Prune Empty Directories' to jldn-uninstall/SKILL.md (source and installed) that bottom-up removes empty directories confined to the plugin dir (same containment boundary as Step 3), with a symlink no-follow guard, before Report Generation (now Step 6). Logic and defense audits passed (see child item 10a)."
+  },
+  {
+    "id": "G08-TODO-10a",
+    "parent": "G08-TODO-10",
+    "title": "Prune Step Placed After Report Generation, Making Report Inaccurate",
+    "status": "completed",
+    "priority": "medium-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T17:30:00+02:00",
+    "details": "Logic audit of the G08-TODO-10 fix caught that the new Prune Empty Directories step was initially inserted after Report Generation, so the report could never actually reflect what was pruned. FIXED: reordered so Prune Empty Directories is Step 5 (runs before the report), Report Generation is Step 6, Finalize is Step 7, in both jldn-uninstall/SKILL.md source and installed copies. Defense audit passed 100%."
+  },
+  {
+    "id": "G08-TODO-11",
+    "title": "Doc Note: Map Is Host-Local, Not Portable Across OSes",
+    "status": "completed",
+    "priority": "low-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T17:10:00+02:00",
+    "details": "The map stores hardcoded absolute POSIX (or Windows) paths, not OS-agnostic references. This is by design -- the map is a local install artifact, never committed to a repo, and installs are performed per-machine -- but this constraint isn't stated anywhere. FIXED: Added a 'Host-Local, Non-Portable' note to the map section of ECOSYSTEM_SETUP.md clarifying the map is a per-machine artifact not intended for cross-OS portability. Documentation-only; no installed copy of ECOSYSTEM_SETUP.md exists, so a single edit sufficed. Defense audit passed (no functional/logic risk in a doc-only change)."
+  },
+  {
+    "id": "G08-TODO-08a",
+    "parent": "G08-TODO-08",
+    "title": "Path Validation: String-Prefix Check Allows Sibling-Directory Escape",
+    "status": "completed",
+    "priority": "critical-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T17:20:00+02:00",
+    "details": "Logic audit of the G08-TODO-08 fix found that a plain string-prefix comparison (path.startsWith(pluginDir)) would incorrectly pass a sibling directory such as ~/.gemini/config/plugins/jldn-ecosystem-evil/, since it textually starts with the plugin dir string without actually being contained inside it. The validation must check for a path-separator boundary after the prefix (or use proper path containment logic), not a raw string prefix match. FIXED: incorporated into the G08-TODO-08 revision of jldn-uninstall Step 3. Defense audit passed 100%."
+  },
+  {
+    "id": "G08-TODO-08b",
+    "parent": "G08-TODO-08",
+    "title": "Path Validation: No Symlink Resolution Specified",
+    "status": "completed",
+    "priority": "critical-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T17:20:00+02:00",
+    "details": "Logic audit of the G08-TODO-08 fix found 'resolve to canonical absolute form' does not specify symlink resolution. A created-array entry that is itself a symlink pointing outside the plugin directory would pass a naive containment check and still result in deletion of an external target when followed. The validation must explicitly resolve the real path (following symlinks) before the containment check, and treat a symlink whose target resolves outside the plugin directory as a failed validation. FIXED: incorporated into the G08-TODO-08 revision of jldn-uninstall Step 3. Defense audit passed 100%."
+  },
+  {
+    "id": "G08-TODO-08c",
+    "parent": "G08-TODO-08",
+    "title": "Path Validation: Undefined Behavior After a Blocked Deletion",
+    "status": "completed",
+    "priority": "high-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T17:20:00+02:00",
+    "details": "Logic audit of the G08-TODO-08 fix found no specified control flow after a path fails validation -- it's ambiguous whether teardown continues processing remaining created-array entries or halts entirely, risking an undefined partial-teardown state. The step must explicitly state that teardown continues past a blocked entry (processing all remaining valid entries normally) while surfacing every Blocked Deletion prominently in the final report for manual user review. FIXED: incorporated into the G08-TODO-08 revision of jldn-uninstall Step 3. Defense audit passed 100%."
+  },
+  {
+    "id": "G08-TODO-08d",
+    "parent": "G08-TODO-08",
+    "title": "Path Validation: jldn-install.log Falsely Flagged as Blocked Deletion",
+    "status": "completed",
+    "priority": "critical-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T18:05:00+02:00",
+    "details": "Caught during pre-execution review, before running jldn-uninstall for real: ~/.gemini/config/jldn-install.log is explicitly permitted in the 'created' array by the Classification Law even though it lives outside ~/.gemini/config/plugins/jldn-ecosystem/. The G08-TODO-08 containment check would have falsely flagged it as a Blocked Deletion (it's still deleted correctly later in Step 7 Finalize, but the report would show a misleading false-positive alarm and the constraint would contradict the documented exception). FIXED: Step 3 of jldn-uninstall/SKILL.md (source and installed) now carves out an explicit exception for this exact path, skipping containment validation for it and deferring to Step 7 for its deletion. Defense audit passed 100% -- no other 'created' entries fall outside the plugin directory in the live map, confirmed by inspection."
+  },
+  {
+    "id": "G08-TODO-12",
+    "title": "Teardown Report File Itself Becomes Untracked Leftover Clutter",
+    "status": "completed",
+    "priority": "high-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T18:30:00+02:00",
+    "details": "Caught by the user after a real teardown run: Step 6's local-disk fallback (~/.gemini/config/jldn-uninstall-report.md) writes a file that is never tracked in any map, so it survives after the map itself is deleted in Step 7 and nothing will ever clean it up on a future install/uninstall cycle -- directly contradicting the 'Zero Clutter' goal the report itself claims to guarantee. FIXED: Step 6 of jldn-uninstall/SKILL.md (source; the installed copy no longer exists post-teardown) now mandates the Artifact delivery path as primary whenever the Artifact tool is available, since a published artifact lives outside the local filesystem entirely and cannot become disk clutter. The local-disk fallback is now explicitly last-resort only (no Artifact tool available), and even then the report must state its own path so the user can delete it manually. Logic and defense audits passed."
+  },
+  {
+    "id": "G08-TODO-13",
+    "title": "Document Install Requirements/Prerequisites in ECOSYSTEM_SETUP.md",
+    "status": "completed",
+    "priority": "medium-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T19:00:00+02:00",
+    "details": "A user-facing scope investigation found the ecosystem only installs via an agentic AI tool with local filesystem write + shell access; chat-only AI surfaces (Claude Desktop default, Gemini App, AI web portals) cannot install it at all. This was never documented. Recommend adding a 'Requirements / Compatible Install Methods' section to ECOSYSTEM_SETUP.md (and/or README.md) listing the confirmed-working method category as formal prerequisites, plus git/python3 runtime dependencies. FIXED: Added a 'Requirements / Compatible Install Methods' section to ECOSYSTEM_SETUP.md documenting the agentic-tool requirement, git/python3 dependencies, and explicitly listing chat-only surfaces as unsupported."
+  },
+  {
+    "id": "G08-TODO-14",
+    "title": "No File-Integrity Verification (Checksums) for Installed Ecosystem Files",
+    "status": "completed",
+    "priority": "critical-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T19:00:00+02:00",
+    "details": "Nothing in the ecosystem detects unauthorized or accidental edits to installed 'created' files -- the map only tracks paths, not content hashes. Recommend extending the map schema to record a sha256 checksum per 'created' file (and a block-only checksum for 'injected' files' JLDN block, since the surrounding file has user content), computed at install time by ECOSYSTEM_SETUP.md. FIXED: Map schema bumped to v2 in ECOSYSTEM_SETUP.md -- every 'created' entry now carries a sha256 of the live file's final content; every 'injected' entry carries a block_sha256 of the canonical block text plus a literal block_template for repair. jldn-install.log is marked volatile/unverified since it grows continuously."
+  },
+  {
+    "id": "G08-TODO-15",
+    "title": "No Secure Source Mirror -- Repair Impossible If Original Download Is Deleted",
+    "status": "completed",
+    "priority": "critical-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T19:00:00+02:00",
+    "details": "If a user installs from an extracted/downloaded copy of the repo and later deletes that source location, there is no way to repair a tampered or corrupted installed file -- the only source of truth was outside the installed footprint. Recommend a secure, read-only mirror directory inside the plugin install itself (e.g. .source/) populated at install time, used exclusively as the repair reference, independent of the original download location. FIXED: ECOSYSTEM_SETUP.md Step 1 now mandates copying global-assets into a .source/ mirror inside the plugin directory itself (same flattened layout, chmod read-only), tracked as ordinary 'created' map entries so it installs, checksums, and uninstalls like everything else -- independent of the user's original download location."
+  },
+  {
+    "id": "G08-TODO-16",
+    "title": "No Repair Skill to Detect Drift and Restore Tampered Files",
+    "status": "completed",
+    "priority": "critical-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T19:00:00+02:00",
+    "details": "There is no skill that compares installed files against their recorded checksums and offers to restore drifted/missing files from the secure source mirror. Recommend a new jldn-repair skill: verify all 'created' file checksums plus 'injected' block checksums, report drift/missing entries, and restore selected/all entries from .source/ on user confirmation. FIXED: New jldn-repair skill created (global-assets/skills/jldn-repair/SKILL.md) -- verifies created-file checksums and injected-block checksums, reports Drifted/Missing/Blocked/Markers-Missing findings, and restores selected/all repairable entries from .source/ on explicit user confirmation, reusing jldn-uninstall's real-path + containment safety checks before any write. Added to jldn-agents.md's Skill Trigger Index."
+  },
+  {
+    "id": "G08-TODO-17",
+    "title": "No In-File Edit Warnings on Ecosystem Files",
+    "status": "completed",
+    "priority": "high-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T19:00:00+02:00",
+    "details": "Installed ecosystem files carry no warning that direct edits are unsupported and may cause unexpected behavior, nor guidance to put customizations in the user's own agents file instead. Recommend a standard 'Edit at your own risk' banner inserted into every shipped file (markdown blockquote for .md, an '@warning' pseudo-key for .json following the existing '@lifecycle'/'@cleanup' convention, a header comment for .py), directing users to their global/local agents file for customizations and to jldn-repair for restoring accidental edits. FIXED: Inserted the warning banner into all 23 markdown files (after the first H1), both JSON files (as an '@warning' key following the existing '@lifecycle'/'@cleanup' pseudo-key convention), and the one Python file (as a '# @warning' comment). All JSON validated, Python syntax validated, markdown spot-checked."
+  },
+  {
+    "id": "G08-TODO-18",
+    "title": "jldn-evolve Must Sync Source Mirror + Checksum After Approved Rule Changes",
+    "status": "completed",
+    "priority": "critical-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T19:00:00+02:00",
+    "details": "Once checksums and a source mirror exist (G08-TODO-14/15), an approved jldn-evolve rule change would immediately register as 'drift' against the stale checksum/mirror, and jldn-repair would incorrectly try to revert a legitimate, approved change. Recommend jldn-evolve update both .source/<file> and the corresponding checksum in the map as the final step of its approved Lock-In routine, so the sanctioned new state becomes the new baseline. FIXED: jldn-evolve Step 4 (Baseline Sync) added -- after an approved rule change, the .source/ mirror copy and the map's recorded sha256 are updated in lockstep, so jldn-repair treats the newly approved state as the baseline instead of flagging it as drift to revert."
+  },
+  {
+    "id": "G08-TODO-19",
+    "parent": "G08-TODO-14",
+    "title": "Per-Project Rename Breaks Checksum Paths and .source/ Correspondence",
+    "status": "completed",
+    "priority": "critical-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T19:30:00+02:00",
+    "details": "Caught during an end-to-end read-through of the finished checksum feature, before any redeploy: Step 2's Per-Project Basis branch renames rules/, plugins/, hooks/ to local-rules/ etc. inside the live plugin dir. If checksums/map were finalized during Step 1 (as originally drafted), every recorded 'created' path would point at a location that no longer exists post-rename, and the assumption that '.source/' mirrors the live layout 1:1 would break for any Per-Project install. Also found: Step 2's Global branch never explicitly said to record block_sha256/block_template at the moment of injection. FIXED: ECOSYSTEM_SETUP.md now (1) defers created-checksum computation and map finalization to the END of Step 2, after whichever branch has settled the final live layout; (2) adds an explicit source_relative field per created entry so jldn-repair always resolves the correct .source/ file via a stored relative path rather than assuming path-structure parity -- .source/ itself is never renamed and keeps the original canonical layout as a fixed reference; (3) explicitly instructs the Global branch to record block_sha256/block_template at injection time. jldn-repair updated to copy from <source_mirror>/<source_relative> instead of assuming '.source/<same relative path>'."
+  },
+  {
+    "id": "G08-TODO-20",
+    "parent": "G08-TODO-16",
+    "title": "Split jldn-repair into Read-Only Verify + Write-Capable Repair",
+    "status": "completed",
+    "priority": "high-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T20:00:00+02:00",
+    "details": "User feedback: verification and repair are conceptually different actions (an audit vs. a fix) and should be two separately-triggerable skills, not bundled into one, so a user can request just an integrity check without implying a fix -- and so no automatic checksum checking is ever wired into routine file access (token-efficiency). FIXED: split into jldn-verify-integrity (new, read-only audit of created-file and injected-block checksums; on finding repairable drift, states 'The system is in need of repair and will begin auto-repair, unless you respond No to my following question.' then explicitly asks 'Do you consent to the system auto-repair?' and only hands off to jldn-repair on an actual affirmative answer, never on silence/ambiguity) and jldn-repair (trimmed to the write-capable engine only, invocable standalone with its own All/Selected/None prompt, or via a consented verify handoff that skips the redundant second prompt -- but always re-verifies independently before writing regardless of how it was invoked). Both registered in jldn-agents.md's Skill Trigger Index. All 27 shipped files' edit-warning banners updated to point at jldn-verify-integrity as the entry point instead of jumping straight to jldn-repair."
+  },
+  {
+    "id": "G08-TODO-21",
+    "parent": "G08-TODO-20",
+    "title": "jldn-repair Duplicated Audit Logic Instead of Delegating to jldn-verify-integrity",
+    "status": "completed",
+    "priority": "high-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T20:20:00+02:00",
+    "details": "User feedback: triggering 'repair' directly should not run its own independent audit and scope prompt -- that duplicates jldn-verify-integrity's logic in two places, and means a user typing 'repair' never actually sees jldn-verify-integrity's canonical report-and-consent flow. Logically, repair should always be gated by verification first, whether the user said 'verify' or 'repair'. FIXED: jldn-repair rewritten -- its Step 1 is now a Verification Gate that, if invoked cold (no consented jldn-verify-integrity pass already completed in this conversation), immediately delegates to jldn-verify-integrity instead of auditing or writing anything itself. It only proceeds to execution when handed the exact findings from an already-consented verify pass, doing a lightweight single-file safety re-check per write (not a full re-audit) rather than duplicating the whole audit. jldn-verify-integrity and jldn-agents.md's Skill Trigger Index updated to match. Not yet synced to the live install (source only) pending user confirmation."
+  },
+  {
+    "id": "G08-TODO-22",
+    "title": "Add Repair Consent-Receipt Cache with Configurable TTL",
+    "status": "open",
+    "priority": "high-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T21:00:00+02:00",
+    "details": "User raised: jldn-repair's 'was jldn-verify-integrity already run with consent' gate (G08-TODO-21) currently has no real mechanism -- it relies on the AI's conversational memory within the same session, which is not a reliable technical check (fails across new sessions, context compression, etc.). Needs a real file-based consent receipt: jldn-verify-integrity writes a short-lived receipt (timestamp, findings hash, expiry) on consent; jldn-repair checks for a valid, unexpired, matching receipt instead of trusting conversational context, and deletes it after one use. Expiry duration must be read from jldn-global-config.json's repair.consent_receipt_ttl_seconds (default 600s / 10min), recommended default only -- fully user-controlled. NOT YET IMPLEMENTED -- design agreed, receipt mechanism and jldn-repair/jldn-verify-integrity wiring still needs to be built."
+  },
+  {
+    "id": "G08-TODO-23",
+    "title": "Three-Tier Config Redesign: jldn-global-config.json, jldn-global-secrets.json, Trimmed Per-Project Templates",
+    "status": "open",
+    "priority": "high-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T21:00:00+02:00",
+    "details": "Devil's-advocate review of the existing two config layers (.dev/config.json Public Blueprint, .secrets/eco-config.json Private Vault) found: (1) the full default 'aliases' keyword map and 'handoff_sync' default were baked identically into every project's template with no shared global source, causing silent copy-drift across projects; (2) no global secrets concept existed, forcing any credential reused across projects (GitHub/GitLab PAT, shared API keys) to be re-entered into every project's Private Vault; (3) jldn-scaffold's repetitive per-project questions (storage volume, category, visibility) had no rememberable global default. AGREED DESIGN: two new global files (jldn-global-config.json for non-sensitive settings incl. aliases/handoff_sync defaults/scaffold defaults/repair.consent_receipt_ttl_seconds, and jldn-global-secrets.json for reusable credentials, chmod 600), populated via install-time Q&A rather than hand-editing (both marked user_editable:true, sha256:null, permanently exempt from checksum drift detection -- the one documented exception to every other file's edit warning). Per-project config.template.json trimmed to overrides-only (handoff_sync:null, aliases:{} = inherit global unless set). eco-config.template.json (Private Vault) unchanged, scope narrowed to genuinely project-unique secrets only. TEMPLATES BUILT AND VALIDATED: local-assets/config/global-config.template.json, local-assets/config/global-secrets.template.json (new), local-assets/config/config.template.json (trimmed). Questionnaire for the global Q&A drafted and approved (7 questions: repair TTL, handoff_sync default, alias defaults, storage volume, category, visibility, global credentials). NOT YET WIRED IN: ECOSYSTEM_SETUP.md Step 1 needs the new global Q&A step; jldn-agents.md needs updated alias-resolution order (global first, then project override); jldn-scaffold and jldn-done need to read the new global defaults; checksum/map schema needs the user_editable exemption actually implemented in jldn-verify-integrity's created-file skip logic."
+  },
+  {
+    "id": "G08-TODO-24",
+    "parent": "G08-TODO-23",
+    "title": "jldn-scaffold Never Asks Public Blueprint / Private Vault Questions for New Projects",
+    "status": "open",
+    "priority": "critical-1",
+    "protection": "protected",
+    "existed_since": "2608.1.0-bs",
+    "created_at": "2026-08-21T21:00:00+02:00",
+    "details": "User asked to verify the assumption that per-project config files get their own questionnaire during new-project creation -- they do not. jldn-scaffold Step 3 (JLDN Ecosystem Opt-In) only copies config.template.json and eco-config.template.json verbatim into the new project; it never asks anything about their contents. The step-by-step questionnaire logic (including the 'this is safe and gitignored' reassurance for secrets) only exists in ECOSYSTEM_SETUP.md Step 3B/3C, which is a different code path that only fires if the global install wizard happens to run inside an already-open project -- it is never invoked by jldn-scaffold's new-project flow. Confirmed live: scaffolding a new project today produces .dev/config.json with handoff_sync:null/aliases:{} and a completely empty .secrets/eco-config.json, with zero prompts. FIX NEEDED: port/adapt ECOSYSTEM_SETUP.md's Step 3B/3C questionnaire logic into jldn-scaffold/SKILL.md's own Step 3, so new-project creation actually asks step-by-step instead of silently stamping blank per-project templates. Should also account for the new inherit-from-global default behavior once G08-TODO-23 is wired in (e.g. only ask for project-specific overrides/additions, not the full set every time)."
   }
 ]

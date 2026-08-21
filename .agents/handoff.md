@@ -1,1 +1,30 @@
-# Agent Handoff
+# JLDN Ecosystem Session Handoff
+
+## Section 1 — Executive Session Summary
+This session reviewed and hardened the `jldn-uninstall` procedure, then executed a full uninstall → fresh install cycle on the live machine. That surfaced a real gap: nothing detected unauthorized edits to installed ecosystem files. In response, we built a checksum-based file-integrity system: a secure `.source/` mirror inside the plugin directory (independent of the user's original download), a map schema bump to `schema_version: 2` carrying per-file SHA-256 checksums, and two new skills — `jldn-verify-integrity` (read-only audit + explicit consent gate) and `jldn-repair` (write-capable restore engine, gated so it can never audit or act on its own). Edit-warning banners were added to all 27 shipped files. The live install was patched in-place to match (no reinstall needed) and self-verified clean (0 drift). The session closed with a devil's-advocate review of the ecosystem's config layers, producing an agreed three-tier config redesign (global settings, global secrets, trimmed per-project overrides) with templates built and a questionnaire drafted — plus discovery of a real gap: `jldn-scaffold` never actually asks the Public Blueprint / Private Vault questions it's supposed to for new projects.
+
+## Section 2 — Codified Work & Resolved Tasks
+- **G08-TODO-08 (+ 08a/b/c/d):** `jldn-uninstall` Step 3 hardened — real-path/symlink-safe containment validation before any deletion, Blocked Deletion reporting, `jldn-install.log`'s documented exception preserved.
+- **G08-TODO-09:** `jldn-uninstall` Step 4 hardened — marker-count/order validation before stripping injected blocks, Blocked Strip reporting.
+- **G08-TODO-10 (+ 10a):** Added empty-directory pruning to `jldn-uninstall`, symlink-safe; caught and fixed a self-introduced step-ordering bug (prune must run before report generation).
+- **G08-TODO-11/13:** Documented the map's host-local/non-portable nature; added install method requirements/prerequisites to `ECOSYSTEM_SETUP.md`.
+- **G08-TODO-12:** Fixed `jldn-uninstall`'s teardown report to prefer Artifact publishing over an untracked local file (was itself becoming leftover clutter).
+- **Live uninstall + reinstall executed** and verified clean (26 plugin files, 4 injected pointer files, git `core.excludesfile` wired correctly).
+- **G08-TODO-14/15/16/18/19:** Built the checksum system — map schema v2 (`sha256`, `source_relative`, `block_sha256`/`block_template`), `.source/` secure mirror (read-only), `jldn-evolve` baseline-sync step so approved changes don't register as false drift, and caught/fixed a real interaction bug where Per-Project rename would have broken checksum paths.
+- **G08-TODO-17:** Edit-warning banners added to all 27 shipped files (markdown blockquote / JSON `@warning` key / Python comment, per file type).
+- **G08-TODO-20/21:** Split verification from repair into two skills — `jldn-verify-integrity` (read-only, owns the consent question) and `jldn-repair` (write-only, never audits on its own; if triggered cold it delegates to `jldn-verify-integrity` instead of acting).
+- **In-place live patch executed:** live install brought fully in sync with source (checksums, `.source/` mirror, both new skills, warning banners) without a full uninstall/reinstall. Self-verified: 56/56 files OK, 4/4 injected blocks OK, 0 drift.
+- **Three-tier config redesign (design + templates only):** `global-config.template.json` and `global-secrets.template.json` built (new), `config.template.json` trimmed to overrides-only. 7-question install-time questionnaire drafted and approved.
+
+## Section 3 — Open Backlog Items & Blockers
+- **G08-TODO-22 (open, high):** The "was `jldn-verify-integrity` already run with consent" gate in `jldn-repair` currently has no real mechanism — it relies on conversational memory, not a file-based check. Needs a short-lived consent-receipt file with a TTL sourced from `jldn-global-config.json` (design agreed: recommended default 600s, fully user-configurable).
+- **G08-TODO-23 (open, high):** The three-tier config redesign is templated but not wired in — `ECOSYSTEM_SETUP.md` needs the new global Q&A step, `jldn-agents.md` needs updated alias-resolution order (global default → project override), `jldn-scaffold`/`jldn-done` need to read the new global defaults, and the checksum system needs the `user_editable` exemption actually implemented.
+- **G08-TODO-24 (open, critical, child of 23):** Confirmed live gap — `jldn-scaffold` Step 3 never asks any Public Blueprint / Private Vault questions for new projects; it silently copies blank templates. Needs the `ECOSYSTEM_SETUP.md` Step 3B/3C questionnaire logic ported into `jldn-scaffold` itself.
+- **Blockers:** None — all above are scoped and ready to implement next session, just deferred for time (late in the day).
+
+## Section 4 — Next Session Prompt & Recommended Actions
+1. **Wire in the three-tier config redesign (G08-TODO-23):** add the global Q&A step to `ECOSYSTEM_SETUP.md` Step 1, update `jldn-agents.md`'s alias-resolution order, and implement the `user_editable`/`sha256: null` exemption in `jldn-verify-integrity`'s created-file check.
+2. **Fix the `jldn-scaffold` questionnaire gap (G08-TODO-24):** port `ECOSYSTEM_SETUP.md`'s Step 3B/3C logic into `jldn-scaffold` Step 3 so new projects actually get asked instead of receiving blank config templates.
+3. **Build the consent-receipt mechanism (G08-TODO-22):** implement the short-lived receipt file `jldn-verify-integrity` writes on consent and `jldn-repair` checks before acting, with TTL sourced from `jldn-global-config.json`.
+4. **After all three land:** run a full uninstall → reinstall (or another in-place patch) to bring the live system current, then run `jldn-verify-integrity` to confirm 0 drift end-to-end.
+5. Once config work is stable, revisit the still-undocumented "self-executing directive" pattern at the top of `ECOSYSTEM_SETUP.md` — flagged earlier as a prompt-injection-shaped design smell, not yet backlogged as a fix.
